@@ -1,0 +1,27 @@
+
+745-while (folksAreJoining() === true)
+1086-Session 5: MERN-1 Nov
+1094-In this session
+1095-Lists and Keys
+1216-Activity 1.1: Rendering multiple similar elements
+1741-Activity 1.2: Rendering multiple similar elements
+1974-Activity 1.3: Rendering multiple similar elements
+2508-Curious Cats
+2642-Activity 2.1: Shuffling checkboxes
+3221-Activity 2.2: Resolving list shuffle issue
+3540-Activity 2.3: Resolving list shuffle issue
+4632-Takeaways: Lists and Keys
+4883-Interview questions
+1165-Side effects with Hooks
+4929-Performing side effects
+5099-Side effects - not needing cleanup
+5372-Activity: Display email for a user
+6159-Skipping Effects
+6369-Activity: Try this out!
+6408-useEffect - cleaning up resources
+7173-Activity: Dog Pics (from Takehome 2) with Hooks
+7176-2. Related logic separated
+7427-Issues with Class components
+7462-Takeaways: Side effects with Hooks
+7512-Until next sprint 
+7512-Thank you
