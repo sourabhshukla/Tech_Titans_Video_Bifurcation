@@ -10,8 +10,6 @@ dotenv.config();
 async function transcribe(jobName, mediaUri, awsRegion, bucketName, bucketKey) {
   const transcribeClient = new TranscribeClient({ region: awsRegion });
 
-  // Start to transcribe the audio from the media file
-  // https://docs.aws.amazon.com/transcribe/latest/APIReference/API_StartTranscriptionJob.html
   await transcribeClient.send(
     new StartTranscriptionJobCommand({
       TranscriptionJobName: jobName,
@@ -26,33 +24,28 @@ async function transcribe(jobName, mediaUri, awsRegion, bucketName, bucketKey) {
     })
   );
 
-  // Gets the status of a current transcription job
-  // https://docs.aws.amazon.com/transcribe/latest/APIReference/API_TranscriptionJob.html
   const command = new GetTranscriptionJobCommand({
     TranscriptionJobName: jobName,
   });
 
-  // Poll the status of the job, and return the transcription job is complete
   return promiseRetry(
     async (retry) => {
       const response = await transcribeClient.send(command);
 
       if (response.TranscriptionJob?.TranscriptionJobStatus !== "COMPLETED") {
-        // Not completed – retry in 2 seconds
         return retry(null);
       }
 
-      // Completed
       return response.TranscriptionJob;
     },
     { minTimeout: 2000, forever: true }
   );
 }
-transcribe(
-  "pollFile",
-  "s3://hackathonbucketsourabh/plants.mp4",
-  "us-east-1",
-  "hackathonbucketsourabh",
-  "output"
-);
-//module.exports = transcribe;
+// transcribe(
+//   "pollFile1",
+//   process.env.BUCKET_URI,
+//   process.env.REGION,
+//   process.env.BUCKET_NAME,
+//   "output"
+// );
+module.exports = transcribe;
