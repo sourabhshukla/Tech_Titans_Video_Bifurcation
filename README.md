@@ -13,8 +13,6 @@ Let's consider what is the imformation we have at our disposal:
 - First we have the session videos itself.
 - Second we have the session material like ppts.
 - Third and most important, how the teaching is done at crio.
-  
-[Uploading VEED - Free Online Screen & Webcam Recorder.webm…]()
 
 # Information from Session Videos
 The Information from the session videos can be added extracted in two forms:
