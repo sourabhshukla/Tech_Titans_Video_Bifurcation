@@ -7,9 +7,11 @@ const dotenv = require("dotenv");
 const promiseRetry = require("promise-retry");
 dotenv.config();
 
-async function transcribe(jobName, mediaUri, awsRegion, bucketName, bucketKey) {
+async function transcribe(jobName, bucketKey) {
   const transcribeClient = new TranscribeClient({ region: awsRegion });
-
+  const mediaUri = process.env.BUCKET_URI;
+  const awsRegion = process.env.REGION;
+  const bucketName = process.env.BUCKET_NAME;
   await transcribeClient.send(
     new StartTranscriptionJobCommand({
       TranscriptionJobName: jobName,

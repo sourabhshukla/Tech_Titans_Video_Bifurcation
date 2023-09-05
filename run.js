@@ -3,6 +3,9 @@ const getNumberOfFrames = require("./getNumberOfFrames");
 const generateTextFilesForFrames = require("./generateTextFilesForFrames");
 const getTimeStamps = require("./getTimeStamps.js");
 const writeToNodeFile = require("./writeToNodeFile");
+const uploadToS3 = require("./uploadToS3");
+const transcribe = require("./transcribe");
+const getSubtitles = require("./getSubtitles");
 
 const run = async () => {
   try {
@@ -16,6 +19,11 @@ const run = async () => {
     await generateTextFilesForFrames(startFrame, totalFrameNumbers);
     const data = await getTimeStamps(headingsPath, totalFrameNumbers);
     await writeToNodeFile("timestamps.txt", data);
+    await uploadToS3("plants.mp4");
+    let rand = Math.ceil(Math.random() * 100);
+    const outputBucketFileName = "output.srt";
+    await transcribe(`poll${rand}`, outputBucketFileName);
+    await getSubtitles(outputBucketFileName);
   } catch (err) {
     console.log(`Error: ${err}`);
   }

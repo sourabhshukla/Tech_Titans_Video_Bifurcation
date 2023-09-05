@@ -19,4 +19,4 @@ const getSubtitles = async (filename, subtitles_filename = "subtitles.srt") => {
 
 //getSubtitles("output.srt", "newTitles.srt");
 
-module.export = getSubtitles;
+module.exports = getSubtitles;

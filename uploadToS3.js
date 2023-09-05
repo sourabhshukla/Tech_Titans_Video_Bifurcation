@@ -3,10 +3,9 @@ const AWS = require("aws-sdk");
 const fs = require("fs");
 dotenv.config();
 
-const uploadToS3 = async () => {
+const uploadToS3 = async (fileName) => {
   const s3 = new AWS.S3();
   const bucketName = process.env.BUCKET_NAME;
-  const fileName = "plants.mp4";
   const fileData = await fs.readFileSync(fileName);
 
   await s3.upload(
