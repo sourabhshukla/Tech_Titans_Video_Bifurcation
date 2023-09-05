@@ -8,7 +8,7 @@ const generateFrames = async (inputVideoPath, outputFramesDir, outputFPS) => {
   }
 
   const command = ffmpeg(inputVideoPath)
-    .outputFPS(1)
+    .outputFPS(outputFPS)
     .output(outputFramesDir + "frame-%d.png")
     .on("end", () => {
       console.log("Conversion finished");
