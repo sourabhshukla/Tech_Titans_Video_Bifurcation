@@ -6,6 +6,7 @@ const writeToNodeFile = require("./writeToNodeFile");
 const uploadToS3 = require("./uploadToS3");
 const transcribe = require("./transcribe");
 const getSubtitles = require("./getSubtitles");
+const subtitleOverlayer = require("./subtitleOverlayer");
 
 const run = async () => {
   try {
@@ -24,6 +25,12 @@ const run = async () => {
     const outputBucketFileName = "output.srt";
     await transcribe(`poll${rand}`, outputBucketFileName);
     await getSubtitles(outputBucketFileName);
+
+    const videoFile = "input.mp4";
+    const subtitleFile = "subtitles.srt";
+    const outputVideoFile = "output_video.mp4";
+
+    await subtitleOverlayer(videoFile, subtitleFile, outputVideoFile);
   } catch (err) {
     console.log(`Error: ${err}`);
   }
