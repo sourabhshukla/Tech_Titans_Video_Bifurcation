@@ -2,22 +2,22 @@ const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(require("@ffmpeg-installer/ffmpeg").path);
 const fs = require("fs");
 
-const inputVideoPath = "input.mp4";
+const generateFrames = async (inputVideoPath, outputFramesDir, outputFPS) => {
+  if (!fs.existsSync(outputFramesDir)) {
+    await fs.mkdirSync(outputFramesDir);
+  }
 
-const outputFramesDir = "frames/";
+  const command = ffmpeg(inputVideoPath)
+    .outputFPS(1)
+    .output(outputFramesDir + "frame-%d.png")
+    .on("end", () => {
+      console.log("Conversion finished");
+    })
+    .on("error", (err) => {
+      console.error("Error:", err);
+    });
 
-if (!fs.existsSync(outputFramesDir)) {
-  fs.mkdirSync(outputFramesDir);
-}
+  await command.run();
+};
 
-const command = ffmpeg(inputVideoPath)
-  .outputFPS(1)
-  .output(outputFramesDir + "frame-%d.png")
-  .on("end", () => {
-    console.log("Conversion finished");
-  })
-  .on("error", (err) => {
-    console.error("Error:", err);
-  });
-
-command.run();
+module.exports = generateFrames;
