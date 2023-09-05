@@ -1,6 +1,7 @@
 const generateFrames = require("./generateFrames");
 const getNumberOfFrames = require("./getNumberOfFrames");
 const generateTextFilesForFrames = require("./generateTextFilesForFrames");
+const readTextFile = require("./readTextFile");
 
 const run = async () => {
   const inputVideoPath = "input.mp4";
