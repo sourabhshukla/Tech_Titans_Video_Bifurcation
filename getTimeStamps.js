@@ -1,17 +1,16 @@
 const getTotalLineCount = require("./getTotalLineCount");
 const getLineByNumber = require("./getLineByNumber");
 const searchForSentenceInFile = require("./searchForText");
-const readFile = require("./readFile.js");
+const readTextFile = require("./readTextFile.js");
 
-async function getTimeStamps() {
-  const headingPath = "headings.txt";
+async function getTimeStamps(headingPath, totalFrameCount) {
+  //   const headingPath = "headings.txt";
   const lineCount = await getTotalLineCount(headingPath);
-  console.log(lineCount);
+
   let timeStamps = [];
   const includedHeadings = new Set();
   for (let lineNumber = 1; lineNumber <= lineCount; lineNumber++) {
     let currHeading = await getLineByNumber(headingPath, lineNumber);
-    const totalFrameCount = 8100;
 
     for (
       let currFrameNumber = 1;
@@ -20,7 +19,7 @@ async function getTimeStamps() {
     ) {
       let inputTextPath = `./frames/frame-${currFrameNumber}.txt`;
       // let currFrameText = await imageToText(inputImagePath);
-      let currFrameText = await readFile(inputTextPath);
+      let currFrameText = await readTextFile(inputTextPath);
       //console.log(currFrameText);
       let textFound = await searchForSentenceInFile(currFrameText, currHeading);
       console.log(`Curr Slide=${lineNumber} Curr Frame=${currFrameNumber}`);
