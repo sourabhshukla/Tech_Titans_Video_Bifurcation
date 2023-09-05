@@ -8,6 +8,7 @@ const run = async () => {
   const outputFramesDir = "frames/";
   const outputFPS = 1;
   const startFrame = 1;
+  const headingsPath = "headings.txt";
   await generateFrames(inputVideoPath, outputFramesDir, outputFPS);
   const totalFrameNumbers = getNumberOfFrames();
   await generateTextFilesForFrames(startFrame, totalFrameNumbers);
