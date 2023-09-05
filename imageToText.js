@@ -14,7 +14,7 @@ const imageToText = async (inputImagePath) => {
     .catch((error) => {
       console.error("Error:", error);
     });
-  console.log(data);
+  //console.log(data);
   return data;
 };
 
